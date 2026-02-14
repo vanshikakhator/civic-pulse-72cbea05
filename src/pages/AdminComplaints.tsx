@@ -30,6 +30,7 @@ export default function AdminComplaints() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [filterPriority, setFilterPriority] = useState<string>("all");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
   const [selected, setSelected] = useState<Complaint | null>(null);
 
   const fetchComplaints = async () => {
@@ -49,6 +50,7 @@ export default function AdminComplaints() {
   const filtered = complaints.filter(c => {
     if (filterCategory !== "all" && c.category !== filterCategory) return false;
     if (filterPriority !== "all" && c.priority !== filterPriority) return false;
+    if (filterStatus !== "all" && c.status !== filterStatus) return false;
     return true;
   });
 
@@ -89,6 +91,20 @@ export default function AdminComplaints() {
               <SelectItem value="Low">Low</SelectItem>
             </SelectContent>
           </Select>
+          <Select value={filterStatus} onValueChange={setFilterStatus}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="Filter by Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="Pending">Pending</SelectItem>
+              <SelectItem value="In Progress">In Progress</SelectItem>
+              <SelectItem value="Resolved">Resolved</SelectItem>
+            </SelectContent>
+          </Select>
+          <span className="text-xs text-muted-foreground ml-auto">
+            {filtered.length} of {complaints.length} complaints
+          </span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
