@@ -162,9 +162,9 @@ export default function Auth() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin">
-              <TabsList className={`grid w-full mb-6 ${isCitizen ? "grid-cols-2" : "grid-cols-1"}`}>
+              <TabsList className="grid w-full grid-cols-2 mb-6">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
-                {isCitizen && <TabsTrigger value="signup">Sign Up</TabsTrigger>}
+                <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
 
               <TabsContent value="signin">
@@ -183,8 +183,7 @@ export default function Auth() {
                 </form>
               </TabsContent>
 
-              {isCitizen && (
-                <TabsContent value="signup">
+              <TabsContent value="signup">
                   <form onSubmit={handleSignUp} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="signup-name">Full Name</Label>
@@ -203,7 +202,7 @@ export default function Auth() {
                     </Button>
                   </form>
                 </TabsContent>
-              )}
+
             </Tabs>
 
             <Button
